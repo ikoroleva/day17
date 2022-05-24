@@ -6,17 +6,29 @@ const loadData = async () => {
         const parsedResponse = await response.json();
         console.log(parsedResponse);
 
-        const navBar = document.querySelector('.nav_bar');
+        const navBar = document.querySelector('.navbar');
+        const navList = document.createElement('ul');
+        navList.classList.add('navbar_ul');
+        navBar.appendChild(navList);
 
         parsedResponse.data.forEach(element => {
 
-            const navElement = document.createElement('button');
-            navElement.classList.add('nav__section');
-            navElement.textContent = element;
-            //navElement.innerHTML = `<a class="nav__section__link" href="">${element}</a>`;
-            navBar.appendChild(navElement);
+            const navItem = document.createElement('li');
+            navItem.classList.add('navbar_ul_item');
+            navList.appendChild(navItem);
 
-            navElement.addEventListener('click', (e) => {
+            const navItemLink = document.createElement('a');
+            navItemLink.classList.add('navbar_ul_item_link');
+            navItemLink.textContent = element;
+            navItem.appendChild(navItemLink);
+
+            // const navElement = document.createElement('button');
+            // navElement.classList.add('nav_bar_section');
+            //navElement.textContent = element;
+            //navElement.innerHTML = `<a class="nav__section__link" href="">${element}</a>`;
+
+
+            navItem.addEventListener('click', (e) => {
                 loadArticles(element);
             })
 
@@ -50,20 +62,20 @@ const loadArticles = async (category) => {
         const parsedResponse = await response.json();
         console.log(parsedResponse);
 
-        const articleCatHeader = document.querySelector('.articles_header');
-        const articleCatDate = document.querySelector('.articles_pubdate');
-        const articleCatImg = document.querySelector('.articles_img');
-        const articleCatDesc = document.querySelector('.articles_description');
-        const articleCont = document.querySelector('.articles_container');
-        const articleCopy = document.querySelector('.articles_copyright');
+        const catHeader = document.querySelector('.category_header');
+        const catDate = document.querySelector('.category_pubdate');
+        const catImg = document.querySelector('.category_img');
+        const catDesc = document.querySelector('.category_description');
+        const articleCont = document.querySelector('.articles');
+        const catCopy = document.querySelector('.category_copyright');
 
-        articleCatHeader.textContent = parsedResponse.data.channel.title;
-        articleCatDate.textContent = parsedResponse.data.channel.pubDate;
-        articleCatDesc.textContent = parsedResponse.data.channel.description;
-        articleCopy.textContent = parsedResponse.data.channel.copyright;
+        catHeader.textContent = parsedResponse.data.channel.title;
+        catDate.textContent = parsedResponse.data.channel.pubDate;
+        catDesc.textContent = parsedResponse.data.channel.description;
+        catCopy.textContent = parsedResponse.data.channel.copyright;
 
-        articleCatImg.setAttribute("src", parsedResponse.data.channel.image.url);
-        articleCatImg.setAttribute("alt", parsedResponse.data.channel.image.title);
+        catImg.setAttribute("src", parsedResponse.data.channel.image.url);
+        catImg.setAttribute("alt", parsedResponse.data.channel.image.title);
 
         //console.log(articleCatImg);
         //const articles_arr = parsedResponse.data.channel.item;
@@ -84,7 +96,7 @@ const loadArticles = async (category) => {
             articleItemHeader.textContent = element.title;
             articleItem.appendChild(articleItemHeader);
 
-            const articleItemDate = document.createElement('h3');
+            const articleItemDate = document.createElement('h4');
             articleItemDate.classList.add('article_item_h4');
             articleItemDate.textContent = element.pubDate;
             articleItem.appendChild(articleItemDate);

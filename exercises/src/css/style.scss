@@ -1,0 +1,115 @@
+$nav-bg: #eee;
+$text-color: #555;
+$text-light-color: #777;
+$font: 'PT Sans Narrow';
+$max-width: 1200px;
+
+html {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    // font-family: 'Alegreya Sans', sans-serif;
+}
+
+*,
+* ::before,
+* ::after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: $font, sans-serif;
+    //background-color: $text-color;
+    margin: 0 auto;
+    padding: 0;
+    max-width: $max-width;
+
+}
+
+.navbar {
+    background: $nav-bg;
+    padding: 0.5em;
+
+    &_ul {
+        padding: 0.5em;
+        display: flex;
+        justify-content: space-between;
+
+        @media (max-width:720px) {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        &_item {
+            list-style: none;
+            padding: .5em;
+
+
+            &_link {
+                text-decoration: none;
+                color: $text-color;
+                font-size: 1.2em;
+                text-transform: uppercase;
+
+                &:hover {
+                    //content: attr(data-item);
+                    color: black;
+                    font-size: bold;
+                    cursor: pointer;
+
+                }
+            }
+        }
+    }
+}
+
+.category {
+    padding: 1.5em;
+
+    &_header {
+        text-align: center;
+        margin: 1em auto;
+        font-size: 2em;
+    }
+
+    &_container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2em;
+
+    }
+
+    &_pubdate {
+        text-align: end;
+        font-size: .9em;
+        color: $text-color;
+    }
+
+    &_description {
+        text-align: center;
+        color: $text-light-color;
+        margin-bottom: 3em;
+    }
+}
+
+.article_item {
+    // &_h3 {}
+
+    &_h4 {
+        color: $text-light-color;
+    }
+
+    // &_link {}
+
+    // &_desc {}
+
+    &_cats {
+        .article_category {
+            color: $text-light-color;
+            margin-right: 1em;
+        }
+    }
+}
+
+// font-family: 'PT Sans Narrow', sans-serif;
