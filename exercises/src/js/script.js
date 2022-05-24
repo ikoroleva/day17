@@ -20,7 +20,7 @@ const loadData = async () => {
                 loadArticles(element);
             })
 
-
+            loadArticles(parsedResponse.data[0]);
 
         });
 
@@ -54,7 +54,7 @@ const loadArticles = async (category) => {
         const articleCatDate = document.querySelector('.articles_pubdate');
         const articleCatImg = document.querySelector('.articles_img');
         const articleCatDesc = document.querySelector('.articles_description');
-        const articleArr = document.querySelector('.articles_container');
+        const articleCont = document.querySelector('.articles_container');
         const articleCopy = document.querySelector('.articles_copyright');
 
         articleCatHeader.textContent = parsedResponse.data.channel.title;
@@ -67,29 +67,27 @@ const loadArticles = async (category) => {
 
         //console.log(articleCatImg);
         //const articles_arr = parsedResponse.data.channel.item;
+        articleCont.innerHTML = '';
 
 
         parsedResponse.data.channel.item.forEach((element) => {
 
+
             const articleItem = document.createElement('div');
             articleItem.classList.add('article_item');
-            articleArr.appendChild(articleItem);
+            articleCont.appendChild(articleItem);
 
-            //console.log(articleItem);
+
 
             const articleItemHeader = document.createElement('h3');
             articleItemHeader.classList.add('article_item_h3');
             articleItemHeader.textContent = element.title;
             articleItem.appendChild(articleItemHeader);
 
-            //console.log(articleItemHeader);
-
-
-
             const articleItemDate = document.createElement('h3');
             articleItemDate.classList.add('article_item_h4');
             articleItemDate.textContent = element.pubDate;
-            articleItem.appendChild(articleItemHeader);
+            articleItem.appendChild(articleItemDate);
 
 
             const articleItemLink = document.createElement('a');
@@ -103,10 +101,22 @@ const loadArticles = async (category) => {
             articleItem.appendChild(articleItemDesc);
 
             const articleItemCats = document.createElement('div');
-            articleItemDesc.classList.add('article_item_Cats');
+            articleItemCats.classList.add('article_item_cats');
+
+
+            element.category.forEach((category) => {
+                const categoryItem = document.createElement('span');
+                categoryItem.classList.add('article_category');
+                categoryItem.textContent = category;
+                articleItemCats.appendChild(categoryItem);
+
+            })
+            articleItem.appendChild(articleItemCats);
 
 
 
+
+            console.log(articleCont);
 
 
 
